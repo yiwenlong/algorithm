@@ -31,21 +31,23 @@ import "fmt"
 //链接：https://leetcode-cn.com/problems/sliding-window-maximum
 
 func enqueue(queue *[]int, k, num int)  {
-	if len(*queue) == 0 {
-		*queue = append(*queue, num)
-	}
-	if len(*queue) < k && (*queue)[0] > num {
+	// 如果队列为空直接添加新元素
+	// 如果新元素小于队首元素，并且队列还有位置，则直接添加新元素
+	if len(*queue) == 0 || (len(*queue) < k && (*queue)[0] > num){
 		*queue = append(*queue, num)
 		return
 	}
-	if len(*queue) < k && (*queue)[0] <= num {
-		*queue = []int{num}
+	// 如果队首位置的元素小于新元素，直接清空队列，然后添加新元素
+	if (*queue)[0] <= num {
+		*queue = []int{ num }
 		return
 	}
+	// 如果队列满了，队首出队
 	if len(*queue) >= k {
 		*queue = (*queue)[len(*queue) - k + 1:]
 	}
 	*queue = append(*queue, num)
+	// 调整队列，最大值左侧的所有元素出队
 	maxIndex := 0
 	for j := 0; j < len(*queue); j++ {
 		if (*queue)[j] >= (*queue)[maxIndex] {
