@@ -29,6 +29,14 @@ func Test_numIslands(t *testing.T) {
 			}},
 			4,
 		},
+		{"testcase3",
+			args{[][]byte {
+				{1,1,1},
+				{0,1,0},
+				{1,1,1},
+			}},
+			1,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
