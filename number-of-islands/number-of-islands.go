@@ -25,24 +25,21 @@ import "fmt"
 
 // https://leetcode-cn.com/problems/number-of-islands/
 
-func setZero(grid [][]byte, startI, startJ, bondI, bondJ int) {
-	grid[startI][startJ] = 0
-	next := startI - 1
-	if next >= 0 && grid[next][startJ] == 1 {
-		setZero(grid, next, startJ, bondI, bondJ)
+func setZero(grid [][]byte, i, j, bondI, bondJ int) {
+	// terminal
+	if i < 0 || i > bondI - 1 || j < 0 || j > bondJ - 1{
+		return
 	}
-	next = startI + 1
-	if next < bondI && grid[next][startJ] == 1 {
-		setZero(grid, next, startJ, bondI, bondJ)
+	if grid[i][j] == 0 {
+		return
 	}
-	next = startJ - 1
-	if next >= 0 && grid[startI][next] == 1 {
-		setZero(grid, startI, next, bondI, bondJ)
-	}
-	next = startJ + 1
-	if next < bondJ && grid[startI][next] == 1 {
-		setZero(grid, startI, next, bondI, bondJ)
-	}
+	// current logic
+	grid[i][j] = 0
+	// drill down
+	setZero(grid, i - 1, j, bondI, bondJ)
+	setZero(grid, i + 1, j, bondI, bondJ)
+	setZero(grid, i, j - 1, bondI, bondJ)
+	setZero(grid, i, j + 1, bondI, bondJ)
 }
 
 func numIslands(grid [][]byte) int {
