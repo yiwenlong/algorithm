@@ -1,6 +1,8 @@
 package _sum
 
-import "sort"
+import (
+	"sort"
+)
 
 // https://leetcode-cn.com/problems/3sum/
 
@@ -17,6 +19,34 @@ import "sort"
 //
 // 使用双指针法
 // 前提是要对数组进行排序
+func threeSum2(nums []int) [][]int {
+	sort.Ints(nums)
+	var (
+		size = len(nums)
+		res [][]int
+		left, right int
+	)
+	if size < 3 || nums[size - 1] < 0 { return res }
+	for i := 0; i < size && nums[i] <= 0; i++ {
+		if i > 0 && nums[i] == nums[i - 1] { continue }
+		left = i + 1
+		right = size - 1
+		for left < right {
+			if nums[left] + nums[right] == -nums[i] {
+				res = append(res, []int{nums[i], nums[left], nums[right]})
+				for left < right && nums[left] == nums[left + 1] { left++ }
+				for left < right && nums[right] == nums[right - 1] { right-- }
+				left++
+				right--
+			} else if nums[left] + nums[right] > -nums[i] {
+				right--
+			} else if nums[left] + nums[right] < -nums[i] {
+				left++
+			}
+		}
+	}
+	return res
+}
 func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	size := len(nums)

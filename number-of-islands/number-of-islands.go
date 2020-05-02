@@ -27,12 +27,8 @@ import "fmt"
 
 func setZero(grid [][]byte, i, j, bondI, bondJ int) {
 	// terminal
-	if i < 0 || i > bondI - 1 || j < 0 || j > bondJ - 1{
-		return
-	}
-	if grid[i][j] == 0 {
-		return
-	}
+	if i < 0 || i > bondI - 1 || j < 0 || j > bondJ - 1 { return }
+	if grid[i][j] == 0 { return }
 	// current logic
 	grid[i][j] = 0
 	// drill down
