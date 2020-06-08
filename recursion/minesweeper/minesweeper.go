@@ -63,7 +63,9 @@ func updateBoard(board [][]byte, click []int) [][]byte {
 
 func setAroundBlank(board [][]byte, position []int) {
 	// terminal
-	if board[position[0]][position[1]] != 'E' { return }
+	if board[position[0]][position[1]] != 'E' {
+		return
+	}
 	if mineCount := mineAroundCount(board, position); mineCount > 0 {
 		board[position[0]][position[1]] = byte('0' + mineCount)
 		return
@@ -88,11 +90,17 @@ func mineAroundCount(board [][]byte, position []int) int {
 }
 
 func viewAround(board [][]byte, position []int, action func(int, int)) {
-	for i := position[0] - 1; i <= position[0] + 1; i++ {
-		if i < 0 || i >= len(board) { continue }
-		for j := position[1] - 1; j <= position[1] + 1; j++ {
-			if j < 0 || j >= len(board[i]) {  continue }
-			if i == position[0] && j == position[1] { continue }
+	for i := position[0] - 1; i <= position[0]+1; i++ {
+		if i < 0 || i >= len(board) {
+			continue
+		}
+		for j := position[1] - 1; j <= position[1]+1; j++ {
+			if j < 0 || j >= len(board[i]) {
+				continue
+			}
+			if i == position[0] && j == position[1] {
+				continue
+			}
 			action(i, j)
 		}
 	}
@@ -100,24 +108,24 @@ func viewAround(board [][]byte, position []int, action func(int, int)) {
 
 func main() {
 	var board = [][]byte{
-		{'B','B','B','B','B','B','1','E'},
-		{'B','1','1','1','B','B','1','M'},
-		{'1','2','M','1','B','B','1','1'},
-		{'M','2','1','1','B','B','B','B'},
-		{'1','1','B','B','B','B','B','B'},
-		{'B','B','B','B','B','B','B','B'},
-		{'B','1','2','2','1','B','B','B'},
-		{'B','1','M','M','1','B','B','B'},
+		{'B', 'B', 'B', 'B', 'B', 'B', '1', 'E'},
+		{'B', '1', '1', '1', 'B', 'B', '1', 'M'},
+		{'1', '2', 'M', '1', 'B', 'B', '1', '1'},
+		{'M', '2', '1', '1', 'B', 'B', 'B', 'B'},
+		{'1', '1', 'B', 'B', 'B', 'B', 'B', 'B'},
+		{'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'},
+		{'B', '1', '2', '2', '1', 'B', 'B', 'B'},
+		{'B', '1', 'M', 'M', '1', 'B', 'B', 'B'},
 	}
 	var dstBoard = [][]byte{
-		{'B','B','B','B','B','B','1','1'},
-		{'B','1','1','1','B','B','1','M'},
-		{'1','2','M','1','B','B','1','1'},
-		{'M','2','1','1','B','B','B','B'},
-		{'1','1','B','B','B','B','B','B'},
-		{'B','B','B','B','B','B','B','B'},
-		{'B','1','2','2','1','B','B','B'},
-		{'B','1','M','M','1','B','B','B'},
+		{'B', 'B', 'B', 'B', 'B', 'B', '1', '1'},
+		{'B', '1', '1', '1', 'B', 'B', '1', 'M'},
+		{'1', '2', 'M', '1', 'B', 'B', '1', '1'},
+		{'M', '2', '1', '1', 'B', 'B', 'B', 'B'},
+		{'1', '1', 'B', 'B', 'B', 'B', 'B', 'B'},
+		{'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'},
+		{'B', '1', '2', '2', '1', 'B', 'B', 'B'},
+		{'B', '1', 'M', 'M', '1', 'B', 'B', 'B'},
 	}
 	updateBoard(board, []int{0, 7})
 	for i := 0; i < len(board); i++ {

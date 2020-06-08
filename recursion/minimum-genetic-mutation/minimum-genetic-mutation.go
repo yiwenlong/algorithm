@@ -40,7 +40,7 @@ package minimum_genetic_mutation
 // 2. 使用一个数组作为缓存，记录已经遍历过的结果。
 func minMutation(start string, end string, bank []string) int {
 	used := make([]int, len(bank))
-	queue := []string{ start }
+	queue := []string{start}
 	nums := 0
 	for len(queue) != 0 {
 		nums++
@@ -50,12 +50,18 @@ func minMutation(start string, end string, bank []string) int {
 				if v != start && used[k] == 0 {
 					diff := 0
 					for m := 0; m < 8; m++ {
-						if v[m] != queue[i][m] { diff++ }
-						if diff >= 2 { break }
+						if v[m] != queue[i][m] {
+							diff++
+						}
+						if diff >= 2 {
+							break
+						}
 					}
 					if diff == 1 {
 						used[k] = nums
-						if bank[k] == end { return nums }
+						if bank[k] == end {
+							return nums
+						}
 						queue = append(queue, bank[k])
 					}
 				}

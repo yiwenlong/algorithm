@@ -22,11 +22,13 @@ func addStrings(num1 string, num2 string) string {
 	if len(num1) < len(num2) {
 		num1, num2 = num2, num1
 	}
-	i, j := len(num1) - 1, len(num2) - 1
+	i, j := len(num1)-1, len(num2)-1
 	var carry, tmp, num uint8
-	res := make([]byte, len(num1) + 1)
+	res := make([]byte, len(num1)+1)
 	for {
-		if i < 0 { break }
+		if i < 0 {
+			break
+		}
 		if j >= 0 {
 			tmp = num1[i] - '0' + num2[j] - '0' + carry
 		} else {

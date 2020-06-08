@@ -1,14 +1,10 @@
 package binary_tree_inorder_traversal
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import "github.com/yiwenlong/algorithm/common"
 
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal(root *common.TreeNode) []int {
 	var res []int
-	var stack []*TreeNode
+	var stack []*common.TreeNode
 	for 0 < len(stack) || root != nil {
 		for root != nil {
 			stack = append(stack, root)

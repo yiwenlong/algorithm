@@ -27,8 +27,8 @@ func Test_maxSlidingWindow(t *testing.T) {
 		},
 		{
 			"normal",
-			args{[]int{9,10,9,-7,-4,-8,2,-6}, 5},
-			[]int{10,10,9,2},
+			args{[]int{9, 10, 9, -7, -4, -8, 2, -6}, 5},
+			[]int{10, 10, 9, 2},
 		},
 	}
 	for _, tt := range tests {

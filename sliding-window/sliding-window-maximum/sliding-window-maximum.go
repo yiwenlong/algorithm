@@ -18,7 +18,7 @@ package sliding_window_maximum
 //1  3  -1 [-3  5  3] 6  7       5
 //1  3  -1  -3 [5  3  6] 7       6
 //1  3  -1  -3  5 [3  6  7]      7
-// 
+//
 //提示：
 //
 //1 <= nums.length <= 10^5
@@ -28,21 +28,21 @@ package sliding_window_maximum
 //来源：力扣（LeetCode）
 //链接：https://leetcode-cn.com/problems/sliding-window-maximum
 
-func enqueue(queue *[]int, k, num int)  {
+func enqueue(queue *[]int, k, num int) {
 	// 如果队列为空直接添加新元素
 	// 如果新元素小于队首元素，并且队列还有位置，则直接添加新元素
-	if len(*queue) == 0 || (len(*queue) < k && (*queue)[0] > num){
+	if len(*queue) == 0 || (len(*queue) < k && (*queue)[0] > num) {
 		*queue = append(*queue, num)
 		return
 	}
 	// 如果队首位置的元素小于新元素，直接清空队列，然后添加新元素
 	if (*queue)[0] <= num {
-		*queue = []int{ num }
+		*queue = []int{num}
 		return
 	}
 	// 如果队列满了，队首出队
 	if len(*queue) >= k {
-		*queue = (*queue)[len(*queue) - k + 1:]
+		*queue = (*queue)[len(*queue)-k+1:]
 	}
 	*queue = append(*queue, num)
 	// 调整队列，最大值左侧的所有元素出队
@@ -54,6 +54,7 @@ func enqueue(queue *[]int, k, num int)  {
 	}
 	*queue = (*queue)[maxIndex:]
 }
+
 // 思路：
 // 使用一个最大长度为 K 的队列维护窗口中的值。
 // 始终保持队首为窗口中的最大值。
