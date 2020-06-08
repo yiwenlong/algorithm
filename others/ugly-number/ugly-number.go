@@ -1,6 +1,5 @@
 package main
 
-
 //我们把只包含因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。
 //
 //
@@ -18,7 +17,7 @@ package main
 
 import "fmt"
 
-func min(nums ... int) int {
+func min(nums ...int) int {
 	minNum := nums[0]
 	for i := 1; i < len(nums); i++ {
 		if nums[i] < minNum {
@@ -34,10 +33,16 @@ func nthUglyNumber(n int) int {
 	p2, p3, p5 := 0, 0, 0
 	m := 0
 	for i := 1; i < n; i++ {
-		res = append(res, min(res[p2] * 2, res[p3] * 3, res[p5] * 5))
-		if res[p2] * 2 == res[i - m] { p2++ }
-		if res[p3] * 3 == res[i - m] { p3++ }
-		if res[p5] * 5 == res[i - m] { p5++ }
+		res = append(res, min(res[p2]*2, res[p3]*3, res[p5]*5))
+		if res[p2]*2 == res[i-m] {
+			p2++
+		}
+		if res[p3]*3 == res[i-m] {
+			p3++
+		}
+		if res[p5]*5 == res[i-m] {
+			p5++
+		}
 		r := min(p2, p3, p5)
 		res = res[min(p2, p3, p5):]
 		p2 -= r
@@ -45,9 +50,9 @@ func nthUglyNumber(n int) int {
 		p5 -= r
 		m += r
 	}
-	return res[len(res) - 1]
+	return res[len(res)-1]
 }
 
 func main() {
-	fmt.Printf("nthUglyNumber(%d) = %d\n",10, nthUglyNumber(10))
+	fmt.Printf("nthUglyNumber(%d) = %d\n", 10, nthUglyNumber(10))
 }

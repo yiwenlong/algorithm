@@ -1,4 +1,5 @@
 package powx_n
+
 //
 // 实现 pow(x, n) ，即计算 x 的 n 次幂函数。
 //
@@ -25,10 +26,14 @@ package powx_n
 // 思路：
 // 使用分治法，把本需要 N 次循环拆成 LOG(N)
 func pow(x float64, n int) float64 {
-	if n == 0 { return 1.0 }
-	if n == 1 { return x }
-	subRes := pow(x, n / 2)
-	if n % 2 == 1 {
+	if n == 0 {
+		return 1.0
+	}
+	if n == 1 {
+		return x
+	}
+	subRes := pow(x, n/2)
+	if n%2 == 1 {
 		return subRes * subRes * x
 	} else {
 		return subRes * subRes
@@ -41,4 +46,3 @@ func myPow(x float64, n int) float64 {
 	}
 	return pow(x, n)
 }
-
